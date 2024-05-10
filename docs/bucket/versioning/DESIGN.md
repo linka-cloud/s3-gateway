@@ -11,12 +11,12 @@ allowing the unmarshaller's to automatically use the right data structures to pa
 
 ### v1.0
 
-| Entry     | Encoding    | Content
-| ----------|-------------|----------------------------------------
-| xlHeader  | [4]byte     | `'X', 'L', '2', ' '`
-| xlVersion | [4]byte     | `'1', ' ', ' ', ' '`
-| xlMetaV2  | msgp object | All versions as single messagepack object
-| [EOF] | |
+| Entry     | Encoding    | Content                                   |
+|-----------|-------------|-------------------------------------------|
+| xlHeader  | [4]byte     | `'X', 'L', '2', ' '`                      |
+| xlVersion | [4]byte     | `'1', ' ', ' ', ' '`                      |
+| xlMetaV2  | msgp object | All versions as single messagepack object |
+| [EOF]     |             |                                           |
 
 ### v1.1+
 
@@ -24,15 +24,15 @@ Version 1.1 added inline data, which will be placed after the metadata.
 
 Therefore, the metadata is wrapped as a binary array for easy skipping.
 
-| Entry          | Encoding       | Content
-| ---------------|----------------|----------------------------------------
-| xlHeader       | [4]byte        | `'X', 'L', '2', ' '`
-| xlVersionMajor | uint16         | Major xl-meta version.
-| xlVersionMinor | uint16         | Minor xl-meta version.
-| xlMetaV2       | msgp bin array | Bin array with serialized metadata
-| crc            | msgp uint      | Lower 32 bits of 64 bit xxhash of previous array contents (v1.2+ only)
-| inline data    | binary         | Inline data if any, see Inline Data section for encoding.  
-| [EOF] | |
+| Entry          | Encoding       | Content                                                                |
+|----------------|----------------|------------------------------------------------------------------------|
+| xlHeader       | [4]byte        | `'X', 'L', '2', ' '`                                                   |
+| xlVersionMajor | uint16         | Major xl-meta version.                                                 |
+| xlVersionMinor | uint16         | Minor xl-meta version.                                                 |
+| xlMetaV2       | msgp bin array | Bin array with serialized metadata                                     |
+| crc            | msgp uint      | Lower 32 bits of 64 bit xxhash of previous array contents (v1.2+ only) |
+| inline data    | binary         | Inline data if any, see Inline Data section for encoding.              |
+| [EOF]          |                |                                                                        |
 
 ## v1.0-v1.2 Versions
 
@@ -86,15 +86,15 @@ A sample msgpack-JSON `xl.meta`, you can debug the content inside `xl.meta` usin
 
 Version 1.3 introduces changes to help with [faster metadata reads and updates](https://blog.min.io/minio-versioning-metadata-deep-dive/)
 
-| Entry           | Encoding                    | Content
-| ----------------|-----------------------------|----------------------------------------
-| xlHeaderVersion | msgp uint                   | header version identifier
-| xlMetaVersion   | msgp uint                   | metadata version identifier
-| versions        | msgp int                    | Number of versions following
-| header_1        | msgp bin array              | Header of version 1
-| metadata_1      | msgp bin array              | Metadata of version 1
-| ...header_n     | msgp bin array              | Header of last version
-| ...metadata_n   | msgp bin array              | Metadata of last version
+| Entry           | Encoding       | Content                      |
+|-----------------|----------------|------------------------------|
+| xlHeaderVersion | msgp uint      | header version identifier    |
+| xlMetaVersion   | msgp uint      | metadata version identifier  |
+| versions        | msgp int       | Number of versions following |
+| header_1        | msgp bin array | Header of version 1          |
+| metadata_1      | msgp bin array | Metadata of version 1        |
+| ...header_n     | msgp bin array | Header of last version       |
+| ...metadata_n   | msgp bin array | Metadata of last version     |
 
 Each header contains a mspg array (tuple) encoded object:
 
@@ -128,10 +128,10 @@ of the previous version.
 
 Inline data is optional. If no inline data is present, it is encoded as 0 bytes.
 
-| Entry               | Encoding                    | Content
-| --------------------|-----------------------------|----------------------------------------
-| xlMetaInlineDataVer | byte                        | version identifier
-| id -> data          | msgp `map[string][]byte`      | Map of string id -> byte content
+| Entry               | Encoding                 | Content                          |
+|---------------------|--------------------------|----------------------------------|
+| xlMetaInlineDataVer | byte                     | version identifier               |
+| id -> data          | msgp `map[string][]byte` | Map of string id -> byte content |
 
 Currently only xlMetaInlineDataVer == 1 exists.
 

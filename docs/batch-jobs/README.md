@@ -1,4 +1,5 @@
 # MinIO Batch Job
+
 MinIO Batch jobs is an MinIO object management feature that lets you manage objects at scale. Jobs currently supported by MinIO
 
 - Replicate objects between buckets on multiple sites
@@ -9,6 +10,7 @@ Upcoming Jobs
 - Copy objects from HDFS to MinIO
 
 ## Replication Job
+
 To perform replication via batch jobs, you create a job. The job consists of a job description YAML that describes
 
 - Source location from where the objects must be copied from
@@ -83,12 +85,15 @@ You can create and run multiple 'replication' jobs at a time there are no predef
 ## Batch Jobs Terminology
 
 ### Job
+
 A job is the basic unit of work for MinIO Batch Job. A job is a self describing YAML, once this YAML is submitted and evaluated - MinIO performs the requested actions on each of the objects obtained under the described criteria in job YAML file.
 
 ### Type
+
 Type describes the job type, such as replicating objects between MinIO sites. Each job performs a single type of operation across all objects that match the job description criteria.
 
 ## Batch Jobs via Commandline
+
 [mc](http://github.com/minio/mc) provides 'mc batch' command to create, start and manage submitted jobs.
 
 ```
@@ -107,17 +112,20 @@ COMMANDS:
 ```
 
 ### Generate a job yaml
+
 ```
 mc batch generate alias/ replicate
 ```
 
 ### Start the batch job (returns back the JID)
+
 ```
 mc batch start alias/ ./replicate.yaml
 Successfully start 'replicate' job `E24HH4nNMcgY5taynaPfxu` on '2022-09-26 17:19:06.296974771 -0700 PDT'
 ```
 
 ### List all batch jobs
+
 ```
 mc batch list alias/
 ID                      TYPE            USER            STARTED
@@ -125,6 +133,7 @@ E24HH4nNMcgY5taynaPfxu  replicate       minioadmin      1 minute ago
 ```
 
 ### List all 'replicate' batch jobs
+
 ```
 mc batch list alias/ --type replicate
 ID                      TYPE            USER            STARTED
@@ -132,6 +141,7 @@ E24HH4nNMcgY5taynaPfxu  replicate       minioadmin      1 minute ago
 ```
 
 ### Real-time 'status' for a batch job
+
 ```
 mc batch status myminio/ E24HH4nNMcgY5taynaPfxu
 ●∙∙
@@ -143,7 +153,8 @@ Elapsed:        2m14.227222868s
 CurrObjName:    share/doc/xml-core/examples/foo.xmlcatalogs
 ```
 
-### 'describe' the batch job yaml.
+### 'describe' the batch job yaml
+
 ```
 mc batch describe myminio/ E24HH4nNMcgY5taynaPfxu
 replicate:

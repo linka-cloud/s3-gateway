@@ -1,9 +1,8 @@
 # minio-gateway
 
-minio-gateway fork of [MinIO](https://github.com/minio/minio) with the s3 gateway feature. 
+minio-gateway fork of [MinIO](https://github.com/minio/minio) with the s3 gateway feature.
 
 It follows the MinIO teams recommandation to fork the project and maintain it as a fork if the gateway feature is needed.
-
 
 ## Why is it still needed ?
 
@@ -12,7 +11,6 @@ It follows the MinIO teams recommandation to fork the project and maintain it as
 2. Many solution using s3 do not support sse-c. With the s3-gateway you get that without extra configuration, e.g. Gitlab does not support sse-c.
 
 3. Because you don't want to pay S3 [data transfer charges](https://aws.amazon.com/s3/pricing/) to get your data back.
-
 
 ## About encryption
 
@@ -34,10 +32,9 @@ We do not recommend using it, but it is there for the ones that need it as a sim
 
 Because it is a MinIO fork and want to keep last security patches applicable without license breakage.
 
-
 ## Is it still feature freeze?
 
-Except for the s3 gateway (the lasting NAS one will be soon removed) it mostly still is. 
+Except for the s3 gateway (the lasting NAS one will be soon removed) it mostly still is.
 
 We might add some at some point some features, like a Kubernetes IAM backend so that we don't have to deploy a proper etcd cluster to support distributed IAM, but other than that, it will then be open to issues/contributions.
 

@@ -36,6 +36,12 @@ lint: ## runs golangci-lint suite of linters
 	@echo "Running $@ check"
 	@${GOPATH}/bin/golangci-lint run --build-tags kqueue --timeout=10m --config ./.golangci.yml
 
+markdown-lint: ## runs markdown linter
+	@echo "Running $@ check"
+	@markdownlint --fix '**/*.md' \
+         --config .github/markdown-lint-cfg.yaml \
+         --disable MD013 MD040 MD051 MD010 MD034
+
 check: test
 test: verifiers build ## builds minio, runs linters, tests
 	@echo "Running unit tests"

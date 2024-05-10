@@ -42,6 +42,7 @@ Install MinIO on Kubernetes:
 - [Deploy a Tenant from the MinIO Operator](https://min.io/docs/minio/kubernetes/upstream/operations/install-deploy-manage/deploy-minio-tenant.html)
 
 Install Distributed MinIO on Linux:
+
 - [Deploy Distributed MinIO on Linux](https://min.io/docs/minio/linux/operations/install-deploy-manage/deploy-minio-multi-node-multi-drive.html#deploy-distributed-minio)
 
 ### 2. Run distributed MinIO

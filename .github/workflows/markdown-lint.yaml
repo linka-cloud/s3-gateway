@@ -26,5 +26,5 @@ jobs:
       run: |
         npm install -g markdownlint-cli
         markdownlint --fix '**/*.md' \
-          --config /home/runner/work/minio/minio/.github/markdown-lint-cfg.yaml \
+          --config /home/runner/work/minio-gateway/minio-gateway/.github/markdown-lint-cfg.yaml \
           --disable MD013 MD040 MD051
