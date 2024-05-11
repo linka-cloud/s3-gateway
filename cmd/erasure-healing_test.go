@@ -1374,7 +1374,6 @@ func TestHealLastDataShard(t *testing.T) {
 
 			_, err = obj.PutObject(ctx, bucket, object,
 				mustGetPutObjReader(t, bytes.NewReader(data), int64(len(data)), "", ""), opts)
-
 			if err != nil {
 				t.Fatal(err)
 			}

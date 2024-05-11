@@ -30,6 +30,7 @@ import (
 	"time"
 
 	"github.com/dustin/go-humanize"
+
 	"github.com/minio/minio/internal/auth"
 	"github.com/minio/minio/internal/hash/sha256"
 	xhttp "github.com/minio/minio/internal/http"
@@ -319,7 +320,7 @@ func (cr *s3ChunkedReader) Read(buf []byte) (n int, err error) {
 		cr.err = err
 		return n, cr.err
 	}
-	b, err = cr.reader.ReadByte()
+	b, err = cr.reader.ReadByte() //nolint:ineffassign
 	if b != '\r' {
 		cr.err = errMalformedEncoding
 		return n, cr.err

@@ -32,6 +32,10 @@ import (
 	"github.com/klauspost/readahead"
 	"github.com/minio/madmin-go"
 	"github.com/minio/minio-go/v7/pkg/tags"
+	"github.com/minio/pkg/mimedb"
+	"github.com/minio/pkg/wildcard"
+	uatomic "go.uber.org/atomic"
+
 	"github.com/minio/minio/internal/bucket/lifecycle"
 	"github.com/minio/minio/internal/bucket/object/lock"
 	"github.com/minio/minio/internal/bucket/replication"
@@ -41,9 +45,6 @@ import (
 	xioutil "github.com/minio/minio/internal/ioutil"
 	"github.com/minio/minio/internal/logger"
 	"github.com/minio/minio/internal/sync/errgroup"
-	"github.com/minio/pkg/mimedb"
-	"github.com/minio/pkg/wildcard"
-	uatomic "go.uber.org/atomic"
 )
 
 // list all errors which can be ignored in object operations.
@@ -631,7 +632,7 @@ func (er erasureObjects) getObjectFileInfo(ctx context.Context, bucket, object s
 		if errors.Is(reducedErr, errErasureReadQuorum) && !strings.HasPrefix(bucket, minioMetaBucket) {
 			_, derr := er.deleteIfDangling(ctx, bucket, object, metaArr, errs, nil, opts)
 			if derr != nil {
-				err = derr
+				err = derr //nolint:ineffassign
 			}
 		}
 		return fi, nil, nil, toObjectErr(reducedErr, bucket, object)

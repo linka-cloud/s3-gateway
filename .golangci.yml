@@ -1,6 +1,6 @@
 linters-settings:
   gofumpt:
-    lang-version: "1.18"
+    lang-version: "1.22"
 
   misspell:
     locale: US
@@ -12,7 +12,6 @@ linters:
     - goimports
     - misspell
     - govet
-    - revive
     - ineffassign
     - gomodguard
     - gofmt

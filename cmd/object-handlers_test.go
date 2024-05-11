@@ -1579,7 +1579,6 @@ func testAPIPutObjectHandler(obj ObjectLayer, instanceType, bucketName string, a
 		// construct HTTP request for PUT Object endpoint.
 		reqV2, err = newTestSignedRequestV2(http.MethodPut, getPutObjectURL("", testCase.bucketName, testCase.objectName),
 			int64(testCase.dataLen), bytes.NewReader(testCase.data), testCase.accessKey, testCase.secretKey, testCase.headers)
-
 		if err != nil {
 			t.Fatalf("Test %d: %s: Failed to create HTTP request for PutObject: <ERROR> %v", i, instanceType, err)
 		}
@@ -2429,7 +2428,6 @@ func testAPICopyObjectHandler(obj ObjectLayer, instanceType, bucketName string, 
 		// construct HTTP request for copy object.
 		req, err = newTestSignedRequestV4(http.MethodPut, getCopyObjectURL("", testCase.bucketName, testCase.newObjectName),
 			0, nil, testCase.accessKey, testCase.secretKey, nil)
-
 		if err != nil {
 			t.Fatalf("Test %d: Failed to create HTTP request for copy Object: <ERROR> %v", i, err)
 		}
@@ -2531,7 +2529,6 @@ func testAPICopyObjectHandler(obj ObjectLayer, instanceType, bucketName string, 
 		}
 
 		err = signRequestV2(reqV2, testCase.accessKey, testCase.secretKey)
-
 		if err != nil {
 			t.Fatalf("Failed to V2 Sign the HTTP request: %v.", err)
 		}
@@ -2621,7 +2618,6 @@ func testAPINewMultipartHandler(obj ObjectLayer, instanceType, bucketName string
 	// Setting an invalid accessID.
 	req, err = newTestSignedRequestV4(http.MethodPost, getNewMultipartURL("", bucketName, objectName),
 		0, nil, "Invalid-AccessID", credentials.SecretKey, nil)
-
 	if err != nil {
 		t.Fatalf("Failed to create HTTP request for NewMultipart Request: <ERROR> %v", err)
 	}
@@ -2672,7 +2668,6 @@ func testAPINewMultipartHandler(obj ObjectLayer, instanceType, bucketName string
 	// Setting invalid AccessID.
 	reqV2, err = newTestSignedRequestV2(http.MethodPost, getNewMultipartURL("", bucketName, objectName),
 		0, nil, "Invalid-AccessID", credentials.SecretKey, nil)
-
 	if err != nil {
 		t.Fatalf("Failed to create HTTP request for NewMultipart Request: <ERROR> %v", err)
 	}
@@ -3404,7 +3399,6 @@ func testAPIDeleteObjectHandler(obj ObjectLayer, instanceType, bucketName string
 		// construct HTTP request for Delete Object end point.
 		req, err = newTestSignedRequestV4(http.MethodDelete, getDeleteObjectURL("", testCase.bucketName, testCase.objectName),
 			0, nil, testCase.accessKey, testCase.secretKey, nil)
-
 		if err != nil {
 			t.Fatalf("Test %d: Failed to create HTTP request for Delete Object: <ERROR> %v", i+1, err)
 		}
@@ -3422,7 +3416,6 @@ func testAPIDeleteObjectHandler(obj ObjectLayer, instanceType, bucketName string
 		// construct HTTP request for Delete Object endpoint.
 		reqV2, err = newTestSignedRequestV2(http.MethodDelete, getDeleteObjectURL("", testCase.bucketName, testCase.objectName),
 			0, nil, testCase.accessKey, testCase.secretKey, nil)
-
 		if err != nil {
 			t.Fatalf("Failed to create HTTP request for NewMultipart Request: <ERROR> %v", err)
 		}
@@ -3515,7 +3508,6 @@ func testAPIPutObjectPartHandlerStreaming(obj ObjectLayer, instanceType, bucketN
 		req, err = newTestStreamingSignedRequest(http.MethodPut,
 			getPutObjectPartURL("", bucketName, testObject, mpartResp.UploadID, "1"),
 			5, 1, bytes.NewReader([]byte("hello")), credentials.AccessKey, credentials.SecretKey)
-
 		if err != nil {
 			t.Fatalf("Failed to create new streaming signed HTTP request: <ERROR> %v.", err)
 		}
@@ -3732,7 +3724,6 @@ func testAPIPutObjectPartHandler(obj ObjectLayer, instanceType, bucketName strin
 			reqV2, err = newTestSignedRequestV2(http.MethodPut,
 				getPutObjectPartURL("", bucketName, test.objectName, uploadID, test.partNumber),
 				int64(len(test.content)), bytes.NewReader([]byte(test.content)), test.accessKey, test.secretKey, nil)
-
 			if err != nil {
 				t.Fatalf("Test %d %s Failed to create a V2  signed request to upload part for %s/%s: <ERROR> %v", i, instanceType,
 					bucketName, test.objectName, err)
@@ -4053,7 +4044,6 @@ func testAPIListObjectPartsHandler(obj ObjectLayer, instanceType, bucketName str
 			reqV4, err = newTestSignedRequestV4(http.MethodGet,
 				getListMultipartURLWithParams("", bucketName, testObject, uploadID, test.maxParts, test.partNumberMarker, ""),
 				0, nil, credentials.AccessKey, credentials.SecretKey, nil)
-
 			if err != nil {
 				t.Fatalf("Failed to create a V4 signed request to list object parts for %s/%s: <ERROR> %v.",
 					bucketName, testObject, err)
@@ -4063,7 +4053,6 @@ func testAPIListObjectPartsHandler(obj ObjectLayer, instanceType, bucketName str
 			reqV2, err = newTestSignedRequestV2(http.MethodGet,
 				getListMultipartURLWithParams("", bucketName, testObject, uploadID, test.maxParts, test.partNumberMarker, ""),
 				0, nil, credentials.AccessKey, credentials.SecretKey, nil)
-
 			if err != nil {
 				t.Fatalf("Failed to create a V2 signed request to list object parts for %s/%s: <ERROR> %v.",
 					bucketName, testObject, err)
