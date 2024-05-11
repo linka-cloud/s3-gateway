@@ -133,7 +133,7 @@ func TestGetHostIP(t *testing.T) {
 		expectedErr    error
 	}{
 		{"localhost", set.CreateStringSet("127.0.0.1"), nil},
-		{"example.org", set.CreateStringSet("93.184.216.34"), nil},
+		{"example.org", set.CreateStringSet("2606:2800:21f:cb07:6820:80da:af6b:8b2c", "93.184.215.14"), nil},
 	}
 
 	for _, testCase := range testCases {
