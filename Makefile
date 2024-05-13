@@ -5,8 +5,8 @@ LDFLAGS := $(shell go run buildscripts/gen-ldflags.go)
 GOARCH := $(shell go env GOARCH)
 GOOS := $(shell go env GOOS)
 
-VERSION ?= $(shell git describe --tags)
-TAG ?= "minio/minio:$(VERSION)"
+VERSION ?= $(shell git describe --tags --dirty|sed 's|-dirty|-dev|')
+TAG ?= "linkacloud/minio-gateway:$(VERSION)"
 
 all: build
 
@@ -120,7 +120,7 @@ hotfix-vars:
 	$(eval LDFLAGS := $(shell MINIO_RELEASE="RELEASE" MINIO_HOTFIX="hotfix.$(shell git rev-parse --short HEAD)" go run buildscripts/gen-ldflags.go $(shell git describe --tags --abbrev=0 | \
     sed 's#RELEASE\.\([0-9]\+\)-\([0-9]\+\)-\([0-9]\+\)T\([0-9]\+\)-\([0-9]\+\)-\([0-9]\+\)Z#\1-\2-\3T\4:\5:\6Z#')))
 	$(eval VERSION := $(shell git describe --tags --abbrev=0).hotfix.$(shell git rev-parse --short HEAD))
-	$(eval TAG := "minio/minio:$(VERSION)")
+	$(eval TAG := "linkacloud/minio-gateway:$(VERSION)")
 
 hotfix: hotfix-vars install ## builds minio binary with hotfix tags
 	@mv -f ./minio ./minio.$(VERSION)
