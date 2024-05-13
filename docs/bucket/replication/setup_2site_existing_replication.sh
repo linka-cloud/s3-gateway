@@ -40,7 +40,7 @@ unset MINIO_KMS_KES_ENDPOINT
 unset MINIO_KMS_KES_KEY_NAME
 
 if [ ! -f ./mc ]; then
-    wget --quiet -O mc https://dl.minio.io/client/mc/release/linux-amd64/mc && \
+    wget --quiet -O mc https://dl.min.io/client/mc/release/linux-amd64/archive/mc.RELEASE.2022-10-29T10-09-23Z && \
         chmod +x mc
 fi
 

@@ -26,6 +26,8 @@ export MINIO_CI_CD=1
 
 MINIO_CONFIG_DIR="$WORK_DIR/.minio"
 MINIO=( "$PWD/minio" --config-dir "$MINIO_CONFIG_DIR" )
+# TODO: Update this when we are compatible with latest mc.
+MC_VERSION="RELEASE.2022-10-29T10-09-23Z"
 
 FILE_1_MB="$MINT_DATA_DIR/datafile-1-MB"
 FILE_65_MB="$MINT_DATA_DIR/datafile-65-MB"
@@ -230,7 +232,7 @@ function __init__()
     mkdir -p "$MINT_DATA_DIR"
 
     MC_BUILD_DIR="mc-$RANDOM"
-    if ! git clone --quiet https://github.com/minio/mc "$MC_BUILD_DIR"; then
+    if ! git clone --quiet -b ${MC_VERSION} --depth 1 https://github.com/minio/mc "$MC_BUILD_DIR" 2>/dev/null; then
         echo "failed to download https://github.com/minio/mc"
         purge "${MC_BUILD_DIR}"
         exit 1
@@ -247,8 +249,8 @@ function __init__()
     ## version is purposefully set to '3' for minio to migrate configuration file
     echo '{"version": "3", "credential": {"accessKey": "minio", "secretKey": "minio123"}, "region": "us-east-1"}' > "$MINIO_CONFIG_DIR/config.json"
 
-    if ! wget -q -O "$FUNCTIONAL_TESTS" https://raw.githubusercontent.com/minio/mc/master/functional-tests.sh; then
-        echo "failed to download https://raw.githubusercontent.com/minio/mc/master/functional-tests.sh"
+    if ! wget -q -O "$FUNCTIONAL_TESTS" https://raw.githubusercontent.com/minio/mc/${MC_VERSION}/functional-tests.sh; then
+        echo "failed to download https://raw.githubusercontent.com/minio/mc/${MC_VERSION}/functional-tests.sh"
         exit 1
     fi
 

@@ -7,6 +7,8 @@ set -x
 WORK_DIR="$PWD/.verify-$RANDOM"
 MINIO_CONFIG_DIR="$WORK_DIR/.minio"
 MINIO=( "$PWD/minio" --config-dir "$MINIO_CONFIG_DIR" server )
+# TODO: Update this when we are compatible with latest mc.
+MC_VERSION="RELEASE.2022-10-29T10-09-23Z"
 
 if [ ! -x "$PWD/minio" ]; then
     echo "minio executable binary not found in current directory"
@@ -23,7 +25,7 @@ function start_minio_5drive() {
     export MINIO_CI_CD=1
 
     MC_BUILD_DIR="mc-$RANDOM"
-    if ! git clone --quiet https://github.com/minio/mc "$MC_BUILD_DIR"; then
+    if ! git clone --quiet -b ${MC_VERSION} --depth 1 https://github.com/minio/mc "$MC_BUILD_DIR" 2>/dev/null; then
 	echo "failed to download https://github.com/minio/mc"
 	purge "${MC_BUILD_DIR}"
 	exit 1

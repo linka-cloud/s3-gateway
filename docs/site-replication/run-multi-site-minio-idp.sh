@@ -37,7 +37,7 @@ export MINIO_PROMETHEUS_AUTH_TYPE=public
 export MINIO_KMS_SECRET_KEY=my-minio-key:OSMM+vkKUTCvQs9YL/CVMIMt43HFhkUpqJxTmGl6rYw=
 
 if [ ! -f ./mc ]; then
-    wget -O mc https://dl.minio.io/client/mc/release/linux-amd64/mc \
+    wget -O mc https://dl.min.io/client/mc/release/linux-amd64/archive/mc.RELEASE.2022-10-29T10-09-23Z \
 	&& chmod +x mc
 fi
 
