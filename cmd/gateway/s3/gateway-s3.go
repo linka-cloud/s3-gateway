@@ -229,7 +229,7 @@ func (g *S3) new(creds madmin.Credentials, transport http.RoundTripper) (*miniog
 
 	if _, err = clntStatic.BucketExists(context.Background(), probeBucketName); err != nil {
 		switch miniogo.ToErrorResponse(err).Code {
-		case "InvalidAccessKeyId":
+		case "InvalidAccessKeyId", "Forbidden":
 			// Check if the provided keys are valid for chain.
 			if _, err = clntChain.BucketExists(context.Background(), probeBucketName); err != nil {
 				if miniogo.ToErrorResponse(err).Code != "AccessDenied" {
