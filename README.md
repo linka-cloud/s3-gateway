@@ -1,8 +1,8 @@
-# minio-gateway
+# s3-gateway
 
-minio-gateway fork of [MinIO](https://github.com/minio/minio) with the s3 gateway feature.
+s3-gateway fork of [MinIO](https://github.com/minio/minio) with the s3 gateway feature.
 
-It follows the MinIO teams recommandation to fork the project and maintain it as a fork if the gateway feature is needed.
+It follows the MinIO teams recommendation to fork the project and maintain it as a fork if the gateway feature is needed.
 
 ## Why is it still needed ?
 
@@ -43,3 +43,7 @@ We might add some at some point some features, like a Kubernetes IAM backend so 
 ## Getting started
 
 ... TODO ... (as soon as we have a proper release)
+
+The helm chart in the repository is out of date.
+
+Do not use it.
